@@ -1,54 +1,69 @@
 #include <stdio.h>
 
 /**
- * Desafio: Movimentação de Peças de Xadrez
- * Objetivo: Simular movimentos usando estruturas de repetição (for, while, do-while).
+ * Desafio Final: Movimentos Complexos de Xadrez
+ * Objetivo: Implementar recursividade para Torre, Bispo e Rainha, 
+ * além de loops aninhados e controle de fluxo para o Cavalo.
  */
 
-#include <stdio.h>
+// --- FUNÇÕES RECURSIVAS ---
+
+
+void moverTorre(int casas) {
+    if (casas <= 0) return; 
+    printf("Direita\n");
+    moverTorre(casas - 1); 
+void moverRainha(int casas) {
+    if (casas <= 0) return;
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
+
+void moverBispoRecursivo(int casas) {
+    if (casas <= 0) return;
+    
+    for (int i = 0; i < 1; i++) { // Vertical
+        for (int j = 0; j < 1; j++) { // Horizontal
+            printf("Cima, Direita\n");
+        }
+    }
+    
+    moverBispoRecursivo(casas - 1);
+}
 
 int main() {
-    // Definição das constantes de movimento
-    const int MOVIMENTO_TORRE = 5;
-    const int MOVIMENTO_BISPO = 5;
-    const int MOVIMENTO_RAINHA = 8;
-    
-    const int CAVALO_BAIXO = 2;
-    const int CAVALO_ESQUERDA = 1;
+   
+    const int MOV_TORRE = 5;
+    const int MOV_BISPO = 5;
+    const int MOV_RAINHA = 8;
 
     printf("Movimento da Torre:\n");
-    for (int i = 0; i < MOVIMENTO_TORRE; i++) {
-        printf("Direita\n");
-    }
+    moverTorre(MOV_TORRE);
     printf("\n");
 
     printf("Movimento do Bispo:\n");
-    int b = 0;
-    while (b < MOVIMENTO_BISPO) {
-        printf("Cima, Direita\n");
-        b++;
-    }
+    moverBispoRecursivo(MOV_BISPO);
     printf("\n");
 
     printf("Movimento da Rainha:\n");
-    int r = 0;
-    do {
-        printf("Esquerda\n");
-        r++;
-    } while (r < MOVIMENTO_RAINHA);
+    moverRainha(MOV_RAINHA);
     printf("\n");
 
     printf("Movimento do Cavalo:\n");
 
-   
-    for (int i = 0; i < 1; i++) { 
-        int j = 0;
-        while (j < CAVALO_BAIXO) {
-            printf("Baixo\n");
-            j++;
-        }
+    
+    for (int i = 0, j = 0; i < 1; i++) {
         
-        printf("Esquerda\n"); 
+        while (j < 3) {
+            j++;
+            if (j < 3) {
+                printf("Cima\n");
+                continue; 
+            }
+            
+            printf("Direita\n");
+            break; 
+        }
     }
 
     return 0;
